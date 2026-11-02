@@ -1,0 +1,39 @@
+<main>
+  <section class="landing-panel" aria-label="Waiting list signup">
+    <div class="signup-pane">
+      <h1 id="form-title">Coming soon</h1>
+
+      <%= form_with model: @contact, url: contacts_path, class: "contact-form", data: { contact_form: true } do |form| %>
+        <div class="field-group">
+          <%= form.label :email, "Your email" %>
+          <%= form.text_field :email,
+                type: "text",
+                inputmode: "email",
+                autocomplete: "email",
+                placeholder: "Email",
+                class: "text-input",
+                aria: { describedby: "email-error" },
+                data: { email_input: true } %>
+          <p id="email-error" class="field-error" role="alert" aria-live="polite" data-email-error <%= "hidden" if @contact.errors[:email].blank? %>>
+            <%= @contact.errors[:email].first %>
+          </p>
+        </div>
+
+        <div class="field-group">
+          <%= form.label :name, "Your name" %>
+          <%= form.text_field :name,
+                autocomplete: "name",
+                placeholder: "Name",
+                class: "text-input",
+                aria: { describedby: "name-error" },
+                data: { name_input: true } %>
+          <p id="name-error" class="field-error" role="alert" aria-live="polite" data-name-error <%= "hidden" if @contact.errors[:name].blank? %>>
+            <%= @contact.errors[:name].first %>
+          </p>
+        </div>
+
+        <%= form.submit "Join the waiting list", class: "submit-button", data: { submit_button: true } %>
+      <% end %>
+    </div>
+  </section>
+</main>
